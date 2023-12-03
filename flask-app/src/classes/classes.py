@@ -3,4 +3,4 @@ import json
 from src import db
 
 
-students = Blueprint('students', __name__)
+classes = Blueprint('classes', __name__)
