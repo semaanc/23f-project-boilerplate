@@ -106,7 +106,20 @@ def delete_specific_announcement(department_name, announcement_id):
     the_response.mimetype = 'application/json'
     return the_response
 
-# # View all of the department's statistics
-# @departments.route('/departments/<department_name>/statistics', methods=['GET'])
-# def view_department_statistics(department_name):
+# View all of the department's statistics
+@departments.route('/departments/<department_name>/statistics', methods=['GET'])
+def view_department_statistics(department_name):
+    
+    cursor = db.get_db().cursor()
+    # Get all note data for all notes in all classes in department
+    cursor.execute(f'SELECT * FROM Notes WHERE class_id=(SELECT class_id FROM Classes WHERE department_name={department_name})')
+    row_headers = [x[0] for x in cursor.description]
+    announcement_data = cursor.fetchall()
+    json_data = []
+    for announcement in announcement_data:
+        json_data.append(dict(zip(row_headers, announcement)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
     

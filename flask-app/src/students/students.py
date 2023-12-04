@@ -66,7 +66,9 @@ def add_new_student_folder(student_id):
     cursor.execute(query)
     db.get_db().commit()
     
-    return 'Success!'
+    response = jsonify('Student folder created')
+    
+    return response
 
 # View contents of a specific student folder
 @students.route('/students/<student_id>/studentfolders/<folder_name>', methods=['GET'])
@@ -111,7 +113,9 @@ def add_note_to_student_folder(student_id, folder_name):
     cursor.execute(query)
     db.get_db().commit()
     
-    return 'Success!'
+    response = jsonify('Note added to student folder')
+    
+    return response
 
 # Delete a specific student folder
 @students.route('/students/<student_id>/studentfolders/<folder_name>', methods=['DELETE'])
@@ -130,5 +134,7 @@ def delete_student_folder(student_id, folder_name):
     cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()
+
+    response = jsonify('Student folder deleted')
     
-    return 'Success!'
+    return response
