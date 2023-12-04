@@ -42,10 +42,10 @@ def create_class():
     return 'Success!'
 
 # View a specific class
-@classes.route('/classes/<class_id>', methods=['GET'])
-def view_specific_class(class_id):
+@classes.route('/classes/<course_id>/<class_id>', methods=['GET'])
+def view_specific_class(course_id, class_id):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM Classes WHERE class_id = %s', (class_id,))
+    cursor.execute('SELECT * FROM Classes WHERE course_id = %s AND class_id = %s', (course_id, class_id))
     row_headers = [x[0] for x in cursor.description]
     class_data = cursor.fetchone()
 
@@ -61,10 +61,10 @@ def view_specific_class(class_id):
         return response
 
 # View all the class’s folders
-@classes.route('/classes/<class_id>/classfolders', methods=['GET'])
-def get_class_folders(class_id):
+@classes.route('/classes/<course_id>/<class_id>/classfolders', methods=['GET'])
+def get_class_folders(course_id, class_id):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM ClassFolders WHERE class_id = %s', (class_id,))
+    cursor.execute('SELECT * FROM ClassFolders WHERE course_id = %s AND class_id = %s', (course_id, class_id))
     row_headers = [x[0] for x in cursor.description]
     class_folders_data = cursor.fetchall()
 
@@ -77,24 +77,24 @@ def get_class_folders(class_id):
     return the_response
 
 # Create a new class folder
-@classes.route('/classes/<class_id>/classfolders', methods=['POST'])
-def create_class_folder(class_id):
+@classes.route('/classes/<course_id>/<class_id>/classfolders', methods=['POST'])
+def create_class_folder(course_id, class_id):
     
     data = request.get_json()
     folder_name = data['folder_name']
     
     cursor = db.get_db().cursor()
-    cursor.execute('INSERT INTO ClassFolders (folder_name, class_id) VALUES (%s, %s)', (folder_name, class_id))
+    cursor.execute('INSERT INTO ClassFolders (folder_name, course_id, class_id) VALUES (%s, %s)', (folder_name, course_id, class_id))
     db.get_db().commit()
 
     response = jsonify('Class folder created successfully!')
     return response
 
 
-@classes.route('/classes/<class_id>/classfolders/<classf_id>', methods=['GET'])
-def get_class_folder(classf_id):
+@classes.route('/classes/<course_id>/<class_id>/classfolders/<classf_id>', methods=['GET'])
+def get_class_folder(course_id, class_id, classf_id):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM ClassFolders WHERE class_id = %s AND folder_name = %s', (class_id, classf_id,))
+    cursor.execute('SELECT * FROM ClassFolders WHERE course_id = %s AND class_id = %s AND folder_name = %s', (course_id, class_id, classf_id,))
     row_headers = [x[0] for x in cursor.description]
     class_folder_data = cursor.fetchone()
 
