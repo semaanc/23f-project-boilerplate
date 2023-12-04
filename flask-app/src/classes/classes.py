@@ -90,7 +90,7 @@ def create_class_folder(course_id, class_id):
     response = jsonify('Class folder created successfully!')
     return response
 
-
+# View a specific class folder
 @classes.route('/classes/<course_id>/<class_id>/classfolders/<classf_id>', methods=['GET'])
 def get_class_folder(course_id, class_id, classf_id):
     cursor = db.get_db().cursor()
@@ -105,19 +105,17 @@ def get_class_folder(course_id, class_id, classf_id):
     return response
 
 
-@classes.route('/classes/<course_id>/<class_id>/classfolders/<classf_id>', methods=['POST'])
-def create_class_folder(course_id, class_id, classf_id):
-    data = request.get_json()
-    folder_name = data['folder_name']
-    
+# Delete a specific class folder
+@classes.route('/classes/<course_id>/<class_id>/classfolders/<classf_id>', methods=['DELETE'])
+def delete_class_folder(course_id, class_id, classf_id):
     cursor = db.get_db().cursor()
-    cursor.execute('INSERT INTO ClassFolders (folder_name, class_id) VALUES (%s, %s)', (folder_name, class_id))
+    cursor.execute('DELETE FROM ClassFolders WHERE course_id = %s AND class_id = %s AND folder_name = %s', (course_id, class_id, classf_id))
     db.get_db().commit()
 
-    response = jsonify({'message': 'Class folder created successfully!'})
-    response.status_code = 201
+    response = jsonify('Class folder deleted successfully!')
     return response
 
+# View all students in a specific class
 @classes.route('/classes/<course_id>/<class_id>/students', methods=['GET'])
 def view_students_in_class(course_id, class_id):
     cursor = db.get_db().cursor()
@@ -139,7 +137,7 @@ def view_students_in_class(course_id, class_id):
     response.mimetype = 'application/json'
     return response
 
-
+# Add a student to a specific class
 @classes.route('/classes/<course_id>/<class_id>/students', methods=['POST'])
 def add_student_to_class(course_id, class_id):
     data = request.json
@@ -153,6 +151,7 @@ def add_student_to_class(course_id, class_id):
     db.get_db().commit()
     return "Success!"
 
+# Remove a student from a specific class
 @classes.route('/classes/<course_id>/<class_id>/students/<student_id>', methods=['DELETE'])
 def remove_student_from_class(course_id, class_id, student_id):
     cursor = db.get_db().cursor()
@@ -167,6 +166,7 @@ def remove_student_from_class(course_id, class_id, student_id):
     response.mimetype = 'application/json'
     return response
 
+# View all office hours hosted by a TA for a specific class
 @classes.route('/classes/<course_id>/<class_id>/oh/<ta_id>', methods=['GET'])
 def get_ta_oh(course_id, class_id, ta_id):
     cursor = db.get_db().cursor()
@@ -180,6 +180,7 @@ def get_ta_oh(course_id, class_id, ta_id):
     the_response.mimetype = 'application/json'
     return the_response
 
+# Add a new office hour for a TA for a specific class
 @classes.route('/classes/<course_id>/<class_id>/oh/<ta_id>', methods=['POST'])
 def add_ta_oh(course_id, class_id, ta_id):
     request_data = request.get_json()
@@ -196,7 +197,8 @@ def add_ta_oh(course_id, class_id, ta_id):
 
     return "Success!"
 
-@classes.route('/classes/<course_id>/<class_id>/oh/<ta_id>', methods=['REMOVE'])
+# Remove a TA’s office hour for a specific class
+@classes.route('/classes/<course_id>/<class_id>/oh/<ta_id>', methods=['DELETE'])
 def remove_ta_oh(course_id, class_id, ta_id):
     cursor = db.get_db().cursor()
     cursor.execute('DELETE FROM OfficeHours WHERE course_id = %s AND class_id = %s AND ta_id = %s', (course_id, class_id, ta_id))
@@ -218,23 +220,15 @@ def view_pinned_note(course_id, class_id, classf_id):
     the_response.mimetype = 'application/json'
     return the_response
 
-
-@classes.route('classes/<course_id>/<class_id>/classfolders/<classf_id>/notes/pinned', methods=['POST'])
-def add_pinned_note(course_id, class_id, classf_id):
+# Pin a note in a specific class folder
+@classes.route('classes/<course_id>/<class_id>/classfolders/<classf_id>/notes', methods=['PUT'])
+def pin_note_in_class_folder():
     data = request.get_json()
-
-    student_id = data.get('student_id')
-    note_content = data.get('note_content')
-    reported = data.get('reported', False)
-    pinned = data.get('pinned', True)
+    note_id = data['note_id']
 
     cursor = db.get_db().cursor()
-    cursor.execute('INSERT INTO Notes (student_id, note_content, reported, pinned, class_folder, course_id, class_id) VALUES (%s, %s, %s, %s, %s, %s, %s)',
-                   (student_id, note_content, reported, pinned, classf_id, course_id, class_id))
+    cursor.execute('UPDATE Notes SET pinned = TRUE WHERE note_id = %s', (note_id,))
     db.get_db().commit()
 
-    response_data = {'Pinned note added successfully'}
-    response = make_response(jsonify(response_data))
-    response.status_code = 200
-    response.mimetype = 'application/json'
+    response = jsonify('Note pinned successfully!')
     return response
