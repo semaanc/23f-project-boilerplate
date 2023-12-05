@@ -47,7 +47,7 @@ def view_specific_class(course_id, class_id):
     cursor = db.get_db().cursor()
     cursor.execute('SELECT * FROM Classes WHERE course_id = %s AND class_id = %s', (course_id, class_id))
     row_headers = [x[0] for x in cursor.description]
-    class_data = cursor.fetchone()
+    class_data = cursor.fetchall()
 
     if class_data: # not null
         json_data = dict(zip(row_headers, class_data))
@@ -122,20 +122,19 @@ def view_students_in_class(course_id, class_id):
     cursor.execute(
         'SELECT s.* FROM Students s '
         'JOIN Student_Classes sc ON s.student_id = sc.student_id '
-        'WHERE sc.class_id = ? AND sc.course_id',
+        'WHERE sc.class_id = %s AND sc.course_id = %s',
         (class_id, course_id)
     )
     row_headers = [x[0] for x in cursor.description]
-    students_data = cursor.fetchall()
+    classes_data = cursor.fetchall()
 
     json_data = []
-    for student in students_data:
-        json_data.append(dict(zip(row_headers, student)))
-
-    response = make_response(jsonify(json_data))
-    response.status_code = 200
-    response.mimetype = 'application/json'
-    return response
+    for cls in classes_data:
+        json_data.append(dict(zip(row_headers, cls)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
 
 # Add a student to a specific class
 @classes.route('/classes/<course_id>/<class_id>/students', methods=['POST'])
