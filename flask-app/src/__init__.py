@@ -34,10 +34,18 @@ def create_app():
 
     # Import the various Blueprint Objects
     from src.notes.notes import notes
+    from src.classes.classes import classes
+    from src.departments.departments import departments
+    from src.students.students import students
+    from src.reportednotes.reportednotes import reportednotes
 
     # Register the routes from each Blueprint with the app object
     # and give a url prefix to each
     app.register_blueprint(notes,   url_prefix='/n')
+    app.register_blueprint(classes,   url_prefix='/c')
+    app.register_blueprint(departments,   url_prefix='/d')
+    app.register_blueprint(students,   url_prefix='/s')
+    app.register_blueprint(reportednotes,   url_prefix='/r')
 
     # Don't forget to return the app object
     return app
