@@ -187,7 +187,7 @@ def add_student_to_class(course_id, class_id):
 def remove_student_from_class(course_id, class_id, student_id):
     cursor = db.get_db().cursor()
     cursor.execute(
-        'DELETE FROM Student_Classes WHERE class_id = ? AND student_id = ?',
+        'DELETE FROM Student_Classes WHERE course_id = %s AND class_id = %s AND student_id = %s',
         (course_id, class_id, student_id)
     )
     db.get_db().commit()
