@@ -1698,6 +1698,8 @@ INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (25, 702
 INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (3, 797, 1, '7:44:00', '2021-01-18');
 INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (3, 8786, 8, '22:35:00', '2023-03-01');
 INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (47, 2219, 8, '13:25:00', '2020-09-22');
+INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (21, 2219, 8, '10:00:00', '2021-10-05');
+INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (5, 2219, 8, '07:00:00', '2021-03-15');
 INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (35, 3597, 6, '8:47:00', '2020-11-18');
 INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (3, 797, 1, '18:19:00', '2021-09-11');
 INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (24, 3844, 2, '21:48:00', '2020-09-16');
