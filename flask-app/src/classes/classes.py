@@ -64,24 +64,14 @@ def get_students_classes(student_id):
     return the_response
 
 # Delete a new class
-@classes.route('/classes', methods=['DELETE'])
-def delete_class():
-    
-    data = request.get_json()
-    current_app.logger.info(data)
-
-    # extracting data
-    course_id = data['course_id']
-    professor_id = data['professor_id']
-    class_id = data['class_id']
-    course_name = data['course_name']
-    department_name = data['department_name']
-
+@classes.route('/classes/<course_id>/<class_id>', methods=['DELETE'])
+def delete_class(course_id, class_id, professor_id):
     cursor = db.get_db().cursor()
-    cursor.execute('DELETE FROM Classes WHERE course_id = %s AND class_id = %s AND professor_id = %s AND course_name = %s AND department_name = %s', (course_id, class_id, professor_id, course_name, department_name))
+    cursor.execute('DELETE FROM Classes WHERE course_id = %s AND class_id = %s AND professor_id = %s', (course_id, class_id, professor_id))
     db.get_db().commit()
 
-    return 'Success!'
+    response = jsonify('Class deleted successfully!')
+    return response
 
 # View a specific class
 @classes.route('/classes/<course_id>/<class_id>', methods=['GET'])
@@ -209,7 +199,7 @@ def remove_student_from_class(course_id, class_id, student_id):
 
 # View all office hours hosted for a specific class
 @classes.route('/classes/<course_id>/<class_id>/oh', methods=['GET'])
-def get_ta_oh(course_id, class_id):
+def get_oh(course_id, class_id):
     cursor = db.get_db().cursor()
     cursor.execute('SELECT * FROM OfficeHours WHERE course_id = %s AND class_id = %s', (course_id, class_id))
     oh_data = cursor.fetchone()
