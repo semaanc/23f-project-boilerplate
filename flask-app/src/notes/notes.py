@@ -7,7 +7,7 @@ notes = Blueprint('notes', __name__)
 
 # View all nonreported notes
 @notes.route('/notes', methods=['GET'])
-def view_specific_note(note_id):
+def get_all_notes():
     try:
         cursor = db.get_db().cursor()
         cursor.execute('SELECT * FROM Notes AND (reported = FALSE)', (note_id))
@@ -27,27 +27,27 @@ def view_specific_note(note_id):
         the_response.mimetype = 'application/json'
         return the_response
     
-# # View a specific note
-# @notes.route('/notes/<note_id>', methods=['GET'])
-# def view_specific_note(note_id):
-#     try:
-#         cursor = db.get_db().cursor()
-#         cursor.execute('SELECT * FROM Notes WHERE (note_id = %s) AND (reported = FALSE)', (note_id))
-#         row_headers = [x[0] for x in cursor.description]
-#         note_data = cursor.fetchall()
-#         json_data = []
-#         for note in note_data:
-#             json_data.append(dict(zip(row_headers, note)))
-#         the_response = make_response(jsonify(json_data))
-#         the_response.status_code = 200
-#         the_response.mimetype = 'application/json'
-#         return the_response
-#     except Exception as e:
-#         error_message = {"error": str(e)}
-#         the_response = make_response(jsonify(error_message))
-#         the_response.status_code = 500
-#         the_response.mimetype = 'application/json'
-#         return the_response
+# View a specific note
+@notes.route('/notes/<note_id>', methods=['GET'])
+def view_specific_note(note_id):
+    try:
+        cursor = db.get_db().cursor()
+        cursor.execute('SELECT * FROM Notes WHERE (note_id = %s) AND (reported = FALSE)', (note_id))
+        row_headers = [x[0] for x in cursor.description]
+        note_data = cursor.fetchall()
+        json_data = []
+        for note in note_data:
+            json_data.append(dict(zip(row_headers, note)))
+        the_response = make_response(jsonify(json_data))
+        the_response.status_code = 200
+        the_response.mimetype = 'application/json'
+        return the_response
+    except Exception as e:
+        error_message = {"error": str(e)}
+        the_response = make_response(jsonify(error_message))
+        the_response.status_code = 500
+        the_response.mimetype = 'application/json'
+        return the_response
 
 # Edit a specific note
 @notes.route('/notes/<note_id>', methods=['PUT'])
