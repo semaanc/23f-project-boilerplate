@@ -1,21 +1,21 @@
--- This file is to bootstrap a database for the CS3200 project. 
+-- This file is to bootstrap a database for the CS3200 project.
 
 -- Create a new database.  You can change the name later.  You'll
--- need this name in the FLASK API file(s),  the AppSmith 
+-- need this name in the FLASK API file(s),  the AppSmith
 -- data source creation.
 create database notetastic;
 
--- Via the Docker Compose file, a special user called webapp will 
--- be created in MySQL. We are going to grant that user 
--- all privilages to the new database we just created. 
--- TODO: If you changed the name of the database above, you need 
+-- Via the Docker Compose file, a special user called webapp will
+-- be created in MySQL. We are going to grant that user
+-- all privilages to the new database we just created.
+-- TODO: If you changed the name of the database above, you need
 -- to change it here too.
 grant all privileges on notetastic.* to 'webapp'@'%';
 flush privileges;
 
 -- Move into the database we just created.
 -- TODO: If you changed the name of the database above, you need to
--- change it here too. 
+-- change it here too.
 use notetastic;
 
 CREATE TABLE IF NOT EXISTS Professors
@@ -1067,66 +1067,66 @@ INSERT INTO StudentFolders (folder_name, date_created, student_id) VALUES ('Art 
 INSERT INTO StudentFolders (folder_name, date_created, student_id) VALUES ('Fundamentals of Computer Science', '2023-06-20 03:07:25', 40);
 -- Notes
 
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (47, '2023-08-21 18:38:44', 'Stand-alone uniform encoding', TRUE, TRUE,'Module 1.1','Microeconomics');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (14, '2020-07-24 22:03:51', 'Reactive contextually-based functionalities', FALSE, FALSE,'Chapter 3','Organic Chemistry');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (25, '2020-07-27 02:18:30', 'Right-sized 3rd generation capacity', TRUE, TRUE,'Module 4.1','Behavioral Neuroscience');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (57, '2022-01-06 21:26:41', 'Seamless full-range time-frame', FALSE, FALSE,'Module 1','Behavioral Neuroscience');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (53, '2023-06-22 14:35:46', 'Balanced zero administration moderator', FALSE, TRUE,'Chapter 3','World Literature');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (9, '2021-06-03 23:10:18', 'Pre-emptive maximized migration', FALSE, TRUE,'Module 2.1','Modern and Contemporary Art');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (23, '2020-06-27 15:10:10', 'Quality-focused bandwidth-monitored protocol', TRUE, TRUE,'Lecture 1','Art History');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (51, '2023-06-06 20:57:30', 'Enhanced object-oriented core', FALSE, TRUE,'Chapter 4','Data Structures and Algorithms');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (11, '2023-11-10 11:15:49', 'Distributed 24 hour standardization', TRUE, FALSE,'Module 2','Ordinary Differential Equations');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (27, '2020-11-04 07:13:05', 'Self-enabling zero defect synergy', TRUE, TRUE,'Lecture 1','Managerial Economics');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (24, '2023-05-03 03:36:37', 'Advanced web-enabled approach', TRUE, FALSE,'Chapter 1','Thermodynamics');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (57, '2022-11-09 02:35:56', 'Vision-oriented methodical firmware', FALSE, TRUE,'Module 1','U.S. History: Reconstruction to the Present');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (33, '2020-12-08 13:17:50', 'Visionary discrete function', TRUE, FALSE,'Chapter 1','Heat Transfer and Fluid Mechanics');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (5, '2021-12-18 09:42:46', 'Universal multi-state time-frame', TRUE, FALSE,'Chapter 4','Renaissance Art History');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (25, '2020-03-06 13:35:34', 'Mandatory directional local area network', TRUE, TRUE,'Module 1.1','Linear Algebra');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (58, '2021-05-31 15:20:35', 'Automated global encryption', FALSE, FALSE,'Module 2.1','Linear Algebra');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (6, '2022-12-16 09:07:28', 'Decentralized responsive internet solution', FALSE, FALSE,'Module 1','Linear Algebra');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (41, '2020-10-24 22:34:50', 'Implemented executive protocol', FALSE, FALSE,'Module 4','Environmental Thermodynamics');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (36, '2021-02-10 04:04:10', 'Synergized didactic focus group', FALSE, TRUE,'Chapter 1','Linear Algebra');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (53, '2022-12-28 16:50:08', 'Robust logistical forecast', FALSE, TRUE,'Chapter 1','Thermodynamics');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (19, '2020-03-10 11:04:22', 'Open-architected radical complexity', FALSE, FALSE,'Module 4','Managerial Economics');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (54, '2022-07-14 11:50:48', 'Enhanced 4th generation success', TRUE, FALSE,'Module 4','U.S. History: Reconstruction to the Present');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (38, '2022-09-14 05:56:26', 'Total background installation', FALSE, TRUE,'Chapter 1','Inorganic Chemistry');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (56, '2022-02-14 07:59:23', 'Triple-buffered radical frame', FALSE, FALSE,'Module 5','Linear Algebra');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (5, '2020-10-03 10:03:09', 'Intuitive well-modulated challenge', TRUE, FALSE,'Module 1.1','Organic Chemistry');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (46, '2023-04-06 17:56:16', 'Upgradable upward-trending local area network', FALSE, FALSE,'Module 5.1','Contemporary Asian Literature');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (16, '2021-01-02 23:54:51', 'Optimized mission-critical ability', FALSE, TRUE,'Module 1.1','Heat Transfer and Fluid Mechanics');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (29, '2020-02-14 19:12:24', 'Re-engineered secondary extranet', FALSE, FALSE,'Chapter 3','Organic Chemistry');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (46, '2022-08-29 05:32:59', 'Synergized neutral project', FALSE, TRUE,'Module 1.1','Thermodynamics');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (8, '2022-05-26 15:19:07', 'Future-proofed 3rd generation toolset', TRUE, TRUE,'Module 1.1','Software Engineering Principles');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (17, '2022-11-13 18:25:35', 'Centralized object-oriented architecture', FALSE, FALSE,'Module 2','Inorganic Chemistry');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (15, '2023-04-06 01:43:00', 'Decentralized explicit structure', FALSE, FALSE,'Lecture 2','Fundamentals of Computer Science');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (45, '2020-11-07 06:54:34', 'Multi-tiered eco-centric info-mediaries', FALSE, FALSE,'Module 4','Data Structures and Algorithms');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (21, '2020-12-13 11:18:16', 'Extended discrete help-desk', TRUE, FALSE,'Module 1.1','Introduction to Psychology');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (38, '2022-12-31 19:30:45', 'Quality-focused bi-directional instruction set', FALSE, FALSE,'Chapter 4','Environmental Thermodynamics');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (24, '2022-04-20 23:50:26', 'Open-architected well-modulated neural-net', TRUE, TRUE,'Module 5.1','Modern and Contemporary Art');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (57, '2020-12-17 10:11:25', 'Profound tertiary migration', FALSE, FALSE,'Lecture 1','Comparative World Literature');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (29, '2023-08-31 08:26:06', 'Mandatory multimedia Graphic Interface', TRUE, FALSE,'Module 4','Linear Algebra');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (55, '2021-03-12 00:00:34', 'Seamless multi-state moderator', TRUE, FALSE,'Chapter 1','Environmental Thermodynamics');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (24, '2021-05-18 04:23:17', 'Cloned solution-oriented task-force', TRUE, FALSE,'Module 3','Thermodynamics');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (4, '2020-06-29 20:17:24', 'Virtual heuristic model', TRUE, TRUE,'Lecture 4','Inorganic Chemistry');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (47, '2021-04-16 14:58:57', 'Up-sized interactive data-warehouse', FALSE, FALSE,'Chapter 4','Ordinary Differential Equations');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (16, '2020-07-14 12:57:14', 'Progressive non-volatile firmware', TRUE, TRUE,'Lecture 4','Organic Chemistry');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (37, '2020-08-10 07:04:50', 'Reverse-engineered bandwidth-monitored support', TRUE, TRUE,'Module 3','Environmental Thermodynamics');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (24, '2021-07-02 12:45:51', 'Virtual user-facing portal', TRUE, TRUE,'Lecture 4','Linear Algebra');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (7, '2022-04-27 15:10:52', 'Organic holistic frame', FALSE, FALSE,'Module 1','Ordinary Differential Equations');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (45, '2021-12-16 00:20:17', 'Enhanced impactful infrastructure', TRUE, TRUE,'Module 3','Managerial Economics');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (53, '2023-01-12 19:48:27', 'Automated 24/7 projection', TRUE, TRUE,'Module 5','Software Engineering Principles');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (21, '2021-08-29 15:09:23', 'Function-based human-resource forecast', TRUE, TRUE,'Module 4','Managerial Economics');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (3, '2020-11-07 09:46:35', 'Implemented stable paradigm', TRUE, FALSE,'Lecture 1','Linear Algebra');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (50, '2023-01-23 18:48:40', 'Object-based contextually-based frame', TRUE, FALSE,'Chapter 1','Environmental Thermodynamics');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (54, '2022-02-21 01:09:36', 'Optimized dedicated protocol', TRUE, TRUE,'Chapter 1','Linear Algebra');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (35, '2021-05-20 09:47:38', 'Adaptive value-added data-warehouse', FALSE, TRUE,'Lecture 4','World Literature');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (48, '2020-03-05 12:04:19', 'Configurable leading edge hierarchy', FALSE, FALSE,'Lecture 3','Contemporary Asian Literature');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (12, '2020-04-26 00:19:22', 'Front-line transitional moratorium', FALSE, FALSE,'Module 1.1','African American History');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (20, '2023-04-23 19:41:00', 'Integrated cohesive hardware', TRUE, FALSE,'Module 1.1','Behavioral Neuroscience');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (26, '2020-05-06 21:04:59', 'Fundamental tertiary orchestration', FALSE, TRUE,'Module 2','Introduction to Cognitive Psychology');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (26, '2023-11-05 14:31:43', 'Multi-lateral actuating database', FALSE, FALSE,'Module 2','African American History');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (34, '2023-06-05 01:55:48', 'Cross-platform real-time website', FALSE, FALSE,'Module 3','Microeconomics');
-INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (49, '2021-02-09 02:26:30', 'Visionary empowering utilisation', FALSE, TRUE,'Module 1','Introduction to Cognitive Psychology');
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (47, '2023-08-21 18:38:44', 'Stand-alone uniform encoding', TRUE, TRUE,'Module 1.1','Microeconomics',2,6383);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (14, '2020-07-24 22:03:51', 'Reactive contextually-based functionalities', FALSE, FALSE,'Chapter 3','Organic Chemistry',1,702);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (25, '2020-07-27 02:18:30', 'Right-sized 3rd generation capacity', TRUE, TRUE,'Module 4.1','Behavioral Neuroscience',1,797);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (57, '2022-01-06 21:26:41', 'Seamless full-range time-frame', FALSE, FALSE,'Module 1','Behavioral Neuroscience',8,2633);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (53, '2023-06-22 14:35:46', 'Balanced zero administration moderator', FALSE, TRUE,'Chapter 3','World Literature',9,3768);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (9, '2021-06-03 23:10:18', 'Pre-emptive maximized migration', FALSE, TRUE,'Module 2.1','Modern and Contemporary Art',4,9552);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (23, '2020-06-27 15:10:10', 'Quality-focused bandwidth-monitored protocol', TRUE, TRUE,'Lecture 1','Art History',1,5277);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (51, '2023-06-06 20:57:30', 'Enhanced object-oriented core', FALSE, TRUE,'Chapter 4','Data Structures and Algorithms',8,2219);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (11, '2023-11-10 11:15:49', 'Distributed 24 hour standardization', TRUE, FALSE,'Module 2','Ordinary Differential Equations',0,123);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (27, '2020-11-04 07:13:05', 'Self-enabling zero defect synergy', TRUE, TRUE,'Lecture 1','Managerial Economics',5,1636);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (24, '2023-05-03 03:36:37', 'Advanced web-enabled approach', TRUE, FALSE,'Chapter 1','Thermodynamics',2,314);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (57, '2022-11-09 02:35:56', 'Vision-oriented methodical firmware', FALSE, TRUE,'Module 1','U.S. History: Reconstruction to the Present',5,1636);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (33, '2020-12-08 13:17:50', 'Visionary discrete function', TRUE, FALSE,'Chapter 1','Heat Transfer and Fluid Mechanics',9,3768);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (5, '2021-12-18 09:42:46', 'Universal multi-state time-frame', TRUE, FALSE,'Chapter 4','Renaissance Art History',7,9402);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (25, '2020-03-06 13:35:34', 'Mandatory directional local area network', TRUE, TRUE,'Module 1.1','Linear Algebra',2,3913);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (58, '2021-05-31 15:20:35', 'Automated global encryption', FALSE, FALSE,'Module 2.1','Linear Algebra',4,9552);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (6, '2022-12-16 09:07:28', 'Decentralized responsive internet solution', FALSE, FALSE,'Module 1','Linear Algebra',6,3098);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (41, '2020-10-24 22:34:50', 'Implemented executive protocol', FALSE, FALSE,'Module 4','Environmental Thermodynamics',5,1636);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (36, '2021-02-10 04:04:10', 'Synergized didactic focus group', FALSE, TRUE,'Chapter 1','Linear Algebra',4,9552);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (53, '2022-12-28 16:50:08', 'Robust logistical forecast', FALSE, TRUE,'Chapter 1','Thermodynamics',8,2219);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (19, '2020-03-10 11:04:22', 'Open-architected radical complexity', FALSE, FALSE,'Module 4','Managerial Economics',8,3274);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (54, '2022-07-14 11:50:48', 'Enhanced 4th generation success', TRUE, FALSE,'Module 4','U.S. History: Reconstruction to the Present',5,1636);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (38, '2022-09-14 05:56:26', 'Total background installation', FALSE, TRUE,'Chapter 1','Inorganic Chemistry',9,3768);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (56, '2022-02-14 07:59:23', 'Triple-buffered radical frame', FALSE, FALSE,'Module 5','Linear Algebra',0,5792);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (5, '2020-10-03 10:03:09', 'Intuitive well-modulated challenge', TRUE, FALSE,'Module 1.1','Organic Chemistry',0,4231);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (46, '2023-04-06 17:56:16', 'Upgradable upward-trending local area network', FALSE, FALSE,'Module 5.1','Contemporary Asian Literature',1,5277);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (16, '2021-01-02 23:54:51', 'Optimized mission-critical ability', FALSE, TRUE,'Module 1.1','Heat Transfer and Fluid Mechanics',2,3913);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (29, '2020-02-14 19:12:24', 'Re-engineered secondary extranet', FALSE, FALSE,'Chapter 3','Organic Chemistry',1,702);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (46, '2022-08-29 05:32:59', 'Synergized neutral project', FALSE, TRUE,'Module 1.1','Thermodynamics',9,8850);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (8, '2022-05-26 15:19:07', 'Future-proofed 3rd generation toolset', TRUE, TRUE,'Module 1.1','Software Engineering Principles',2,6383);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (17, '2022-11-13 18:25:35', 'Centralized object-oriented architecture', FALSE, FALSE,'Module 2','Inorganic Chemistry',0,123);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (15, '2023-04-06 01:43:00', 'Decentralized explicit structure', FALSE, FALSE,'Lecture 2','Fundamentals of Computer Science',5,1636);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (45, '2020-11-07 06:54:34', 'Multi-tiered eco-centric info-mediaries', FALSE, FALSE,'Module 4','Data Structures and Algorithms',3,4521);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (21, '2020-12-13 11:18:16', 'Extended discrete help-desk', TRUE, FALSE,'Module 1.1','Introduction to Psychology',2,3913);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (38, '2022-12-31 19:30:45', 'Quality-focused bi-directional instruction set', FALSE, FALSE,'Chapter 4','Environmental Thermodynamics',8,2219);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (24, '2022-04-20 23:50:26', 'Open-architected well-modulated neural-net', TRUE, TRUE,'Module 5.1','Modern and Contemporary Art',0,123);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (57, '2020-12-17 10:11:25', 'Profound tertiary migration', FALSE, FALSE,'Lecture 1','Comparative World Literature',0,5792);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (29, '2023-08-31 08:26:06', 'Mandatory multimedia Graphic Interface', TRUE, FALSE,'Module 4','Linear Algebra',8,3274);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (55, '2021-03-12 00:00:34', 'Seamless multi-state moderator', TRUE, FALSE,'Chapter 1','Environmental Thermodynamics',2,314);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (24, '2021-05-18 04:23:17', 'Cloned solution-oriented task-force', TRUE, FALSE,'Module 3','Thermodynamics',8,2219);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (4, '2020-06-29 20:17:24', 'Virtual heuristic model', TRUE, TRUE,'Lecture 4','Inorganic Chemistry',2,3913);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (47, '2021-04-16 14:58:57', 'Up-sized interactive data-warehouse', FALSE, FALSE,'Chapter 4','Ordinary Differential Equations',7,9402);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (16, '2020-07-14 12:57:14', 'Progressive non-volatile firmware', TRUE, TRUE,'Lecture 4','Organic Chemistry',6,3597);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (37, '2020-08-10 07:04:50', 'Reverse-engineered bandwidth-monitored support', TRUE, TRUE,'Module 3','Environmental Thermodynamics',5,9091);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (24, '2021-07-02 12:45:51', 'Virtual user-facing portal', TRUE, TRUE,'Lecture 4','Linear Algebra',6,3597);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (7, '2022-04-27 15:10:52', 'Organic holistic frame', FALSE, FALSE,'Module 1','Ordinary Differential Equations',2,3913);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (45, '2021-12-16 00:20:17', 'Enhanced impactful infrastructure', TRUE, TRUE,'Module 3','Managerial Economics',6,5850);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (53, '2023-01-12 19:48:27', 'Automated 24/7 projection', TRUE, TRUE,'Module 5','Software Engineering Principles',1,797);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (21, '2021-08-29 15:09:23', 'Function-based human-resource forecast', TRUE, TRUE,'Module 4','Managerial Economics',8,3274);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (3, '2020-11-07 09:46:35', 'Implemented stable paradigm', TRUE, FALSE,'Lecture 1','Linear Algebra',5,1636);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (50, '2023-01-23 18:48:40', 'Object-based contextually-based frame', TRUE, FALSE,'Chapter 1','Environmental Thermodynamics',2,314);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (54, '2022-02-21 01:09:36', 'Optimized dedicated protocol', TRUE, TRUE,'Chapter 1','Linear Algebra',9,3768);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (35, '2021-05-20 09:47:38', 'Adaptive value-added data-warehouse', FALSE, TRUE,'Lecture 4','World Literature',2,3913);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (48, '2020-03-05 12:04:19', 'Configurable leading edge hierarchy', FALSE, FALSE,'Lecture 3','Contemporary Asian Literature',6,5850);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (12, '2020-04-26 00:19:22', 'Front-line transitional moratorium', FALSE, FALSE,'Module 1.1','African American History',2,7383);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (20, '2023-04-23 19:41:00', 'Integrated cohesive hardware', TRUE, FALSE,'Module 1.1','Behavioral Neuroscience',0,123);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (26, '2020-05-06 21:04:59', 'Fundamental tertiary orchestration', FALSE, TRUE,'Module 2','Introduction to Cognitive Psychology',6,8514);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (26, '2023-11-05 14:31:43', 'Multi-lateral actuating database', FALSE, FALSE,'Module 2','African American History',6,8514);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (34, '2023-06-05 01:55:48', 'Cross-platform real-time website', FALSE, FALSE,'Module 3','Microeconomics',4,9552);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (49, '2021-02-09 02:26:30', 'Visionary empowering utilisation', FALSE, TRUE,'Module 1','Introduction to Cognitive Psychology',3,7509);
 
 -- Student_Classes
 

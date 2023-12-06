@@ -68,6 +68,24 @@ def view_specific_reportednote(note_id):
         the_response.status_code = 500
         the_response.mimetype = 'application/json'
         return the_response
+    
+# Unreport a reported note
+@reportednotes.route('/reportednotes/<note_id>', methods=['PUT'])
+def unreport_reportednote(note_id):
+    try:
+        cursor = db.get_db().cursor()
+        cursor.execute('UPDATE Notes SET reported = FALSE WHERE (note_id = %s) AND (reported)', (note_id))
+        db.get_db().commit()
+        the_response = make_response(jsonify({"message": "Unreported"}))
+        the_response.status_code = 200
+        the_response.mimetype = 'application/json'
+        return the_response
+    except Exception as e:
+        error_message = {"error": str(e)}
+        the_response = make_response(jsonify(error_message))
+        the_response.status_code = 500
+        the_response.mimetype = 'application/json'
+        return the_response
 
 # Delete a reported note
 @reportednotes.route('/reportednotes/<note_id>', methods=['DELETE'])

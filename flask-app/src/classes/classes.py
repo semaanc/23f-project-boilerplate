@@ -21,6 +21,7 @@ def get_all_classes():
     the_response.mimetype = 'application/json'
     return the_response
 
+# Create a new class
 @classes.route('/classes', methods=['POST'])
 def create_class():
     
@@ -29,9 +30,9 @@ def create_class():
 
     # extracting data
     course_id = data['course_id']
+    professor_id = data['professor_id']
     class_id = data['class_id']
     course_name = data['course_name']
-    professor_id = data['professor_id']
     department_name = data['department_name']
 
     cursor = db.get_db().cursor()
@@ -42,7 +43,7 @@ def create_class():
     return 'Success!'
 
 
-# View all classes a specific student is enolled in
+# View all classes a specific student is enrolled in
 @classes.route('/classes/<student_id>', methods=['GET'])
 def get_students_classes(student_id):
     
@@ -58,6 +59,26 @@ def get_students_classes(student_id):
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
+# Delete a new class
+@classes.route('/classes', methods=['DELETE'])
+def delete_class():
+    
+    data = request.get_json()
+    current_app.logger.info(data)
+
+    # extracting data
+    course_id = data['course_id']
+    professor_id = data['professor_id']
+    class_id = data['class_id']
+    course_name = data['course_name']
+    department_name = data['department_name']
+
+    cursor = db.get_db().cursor()
+    cursor.execute('DELETE FROM Classes WHERE course_id = %s AND class_id = %s AND professor_id = %s AND course_name = %s AND department_name = %s', (course_id, class_id, professor_id, course_name, department_name))
+    db.get_db().commit()
+
+    return 'Success!'
 
 # View a specific class
 @classes.route('/classes/<course_id>/<class_id>', methods=['GET'])
