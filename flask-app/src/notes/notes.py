@@ -10,7 +10,7 @@ notes = Blueprint('notes', __name__)
 def view_specific_note(note_id):
     try:
         cursor = db.get_db().cursor()
-        cursor.execute('SELECT * FROM Notes WHERE (note_id = %s)', (note_id))
+        cursor.execute('SELECT * FROM Notes WHERE (note_id = %s) AND (reported = FALSE)', (note_id))
         row_headers = [x[0] for x in cursor.description]
         note_data = cursor.fetchall()
         json_data = []

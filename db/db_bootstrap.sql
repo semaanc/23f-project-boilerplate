@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS Departments
     PRIMARY KEY (department_name),
     FOREIGN KEY (administrator_id)
         REFERENCES DepartmentAdministrators (administrator_id)
-        ON UPDATE CASCADE ON DELETE RESTRICT
+        ON UPDATE CASCADE ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS Departments_Professors
@@ -55,10 +55,10 @@ CREATE TABLE IF NOT EXISTS Departments_Professors
     PRIMARY KEY (department_name, professor_id),
     FOREIGN KEY (department_name)
         REFERENCES Departments (department_name)
-        ON UPDATE CASCADE ON DELETE RESTRICT,
+        ON UPDATE CASCADE ON DELETE cascade,
     FOREIGN KEY (professor_id)
         REFERENCES Professors (professor_id)
-        ON UPDATE CASCADE ON DELETE RESTRICT
+        ON UPDATE CASCADE ON DELETE cascade
 );
 
 
@@ -76,9 +76,9 @@ CREATE TABLE IF NOT EXISTS Departments_Students
     student_id      INT,
     PRIMARY KEY (department_name, student_id),
     FOREIGN KEY (department_name) REFERENCES Departments (department_name)
-        ON UPDATE CASCADE ON DELETE RESTRICT,
+        ON UPDATE CASCADE ON DELETE cascade,
     FOREIGN KEY (student_id) REFERENCES Students (student_id)
-        ON UPDATE CASCADE ON DELETE RESTRICT
+        ON UPDATE CASCADE ON DELETE cascade
 );
 
 
@@ -136,13 +136,13 @@ CREATE TABLE IF NOT EXISTS Notes
 
     FOREIGN KEY (student_id)
         REFERENCES Students (student_id)
-        ON UPDATE CASCADE ON DELETE RESTRICT,
+        ON UPDATE CASCADE ON DELETE cascade,
     FOREIGN KEY (student_folder)
         REFERENCES StudentFolders (folder_name)
-        ON UPDATE CASCADE ON DELETE RESTRICT,
+        ON UPDATE CASCADE ON DELETE cascade,
     FOREIGN KEY (class_folder, course_id, class_id)
         REFERENCES ClassFolders (folder_name, course_id, class_id)
-        ON UPDATE CASCADE ON DELETE RESTRICT
+        ON UPDATE CASCADE ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS Student_Classes
@@ -153,10 +153,10 @@ CREATE TABLE IF NOT EXISTS Student_Classes
     PRIMARY KEY (student_id, course_id, class_id),
     FOREIGN KEY (student_id)
         REFERENCES Students (student_id)
-        ON UPDATE CASCADE ON DELETE RESTRICT,
+        ON UPDATE CASCADE ON DELETE cascade,
     FOREIGN KEY (course_id, class_id)
         REFERENCES Classes (course_id, class_id)
-        ON UPDATE CASCADE ON DELETE RESTRICT
+        ON UPDATE CASCADE ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS TAs
@@ -175,15 +175,16 @@ CREATE TABLE IF NOT EXISTS Classes_TAs
     PRIMARY KEY (course_id, class_id, ta_id),
     FOREIGN KEY (course_id, class_id)
         REFERENCES Classes (course_id, class_id)
-        ON UPDATE CASCADE ON DELETE RESTRICT,
+        ON UPDATE CASCADE ON DELETE cascade,
     FOREIGN KEY (ta_id)
         REFERENCES TAs (ta_id)
-        ON UPDATE CASCADE ON DELETE RESTRICT
+        ON UPDATE CASCADE ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS Comments
 (
     comment_id   INT AUTO_INCREMENT PRIMARY KEY,
+    comment_content TEXT NOT NULL,
     date_posted  DATETIME DEFAULT CURRENT_TIMESTAMP,
     note_id      INT,
     student_id   INT,
@@ -215,10 +216,10 @@ CREATE TABLE IF NOT EXISTS DepartmentAnnouncements
     PRIMARY KEY (announcement_id),
     FOREIGN KEY (department_name)
         REFERENCES Departments (department_name)
-        ON UPDATE cascade ON DELETE restrict,
+        ON UPDATE cascade ON DELETE cascade,
     FOREIGN KEY (administrator_id)
         REFERENCES DepartmentAdministrators (administrator_id)
-        ON UPDATE cascade ON DELETE restrict
+        ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS OfficeHours
@@ -231,10 +232,10 @@ CREATE TABLE IF NOT EXISTS OfficeHours
     PRIMARY KEY (ta_id, course_id, class_id, date, time),
     FOREIGN KEY (course_id, class_id)
         REFERENCES Classes (course_id, class_id)
-        ON UPDATE cascade ON DELETE restrict,
+        ON UPDATE cascade ON DELETE cascade,
     FOREIGN KEY (ta_id)
         REFERENCES TAs (ta_id)
-        ON UPDATE cascade ON DELETE restrict
+        ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS Department_TAs
@@ -244,10 +245,10 @@ CREATE TABLE IF NOT EXISTS Department_TAs
     PRIMARY KEY (department_name, ta_id),
     FOREIGN KEY (department_name)
         REFERENCES Departments (department_name)
-        ON UPDATE cascade ON DELETE restrict,
+        ON UPDATE cascade ON DELETE cascade,
     FOREIGN KEY (ta_id)
         REFERENCES TAs (ta_id)
-        ON UPDATE cascade ON DELETE restrict
+        ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS OHLocations
@@ -261,7 +262,7 @@ CREATE TABLE IF NOT EXISTS OHLocations
     PRIMARY KEY (ta_id, course_id, class_id, date, time, location),
     FOREIGN KEY (ta_id, course_id, class_id, date, time)
         REFERENCES OfficeHours (ta_id, course_id, class_id, date, time)
-        ON UPDATE CASCADE ON DELETE RESTRICT
+        ON UPDATE CASCADE ON DELETE cascade
 );
 
 -- Mock Data
@@ -1584,66 +1585,66 @@ INSERT INTO Classes_TAs (course_id, class_id, ta_id) VALUES (3844, 2, 28);
 
 -- Comments
 
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-06-23 10:09:58', 35, NULL, NULL, 47);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-02-18 01:06:25', 37, NULL, NULL, 22);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-10-22 22:03:08', 46, NULL, NULL, 20);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-06-25 07:54:58', 22, NULL, NULL, 46);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-04-19 05:27:05', 27, NULL, NULL, 9);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-12-13 10:07:39', 26, NULL, NULL, 41);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-10-11 02:10:01', 46, NULL, NULL, 30);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-04-30 21:01:55', 15, NULL, NULL, 32);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-08-12 19:57:14', 30, NULL, NULL, 47);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-10-30 10:07:51', 60, NULL, NULL, 30);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-11-15 22:18:34', 22, NULL, NULL, 26);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-02-13 15:10:54', 43, NULL, NULL, 41);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-08-02 05:22:52', 40, NULL, NULL, 3);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-10-07 00:49:00', 20, NULL, NULL, 46);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-08-26 04:42:06', 26, NULL, NULL, 50);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-03-19 03:00:57', 10, NULL, NULL, 28);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-03-05 05:27:04', 55, NULL, NULL, 5);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-10-17 06:36:06', 25, NULL, NULL, 6);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-04-02 15:21:05', 2, NULL, NULL, 32);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-09-17 03:37:48', 17, NULL, 27, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-11-02 05:40:35', 53, NULL, 2, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-11-26 03:29:43', 6, NULL, 12, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-06-19 16:26:46', 44, NULL, 48, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-05-29 19:32:12', 25, NULL, 44, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-06-12 11:52:19', 47, NULL, 2, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-06-06 23:09:05', 8, NULL, 45, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-11-19 04:14:40', 39, NULL, 22, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-03-28 11:17:20', 40, NULL, 47, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-01-24 18:35:20', 56, NULL, 36, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-02-21 08:49:46', 9, NULL, 37, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-08-03 16:46:13', 38, NULL, 54, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-10-13 05:04:52', 35, NULL, 38, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-06-08 06:16:42', 23, NULL, 30, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-01-14 15:04:36', 10, NULL, 10, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-07-15 16:02:51', 23, NULL, 17, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-03-03 17:20:49', 32, NULL, 58, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-04-09 06:11:19', 35, NULL, 21, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-07-21 00:59:21', 19, NULL, 26, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-12-26 00:19:16', 23, NULL, 48, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-01-22 04:39:29', 22, 18, NULL, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-05-01 07:35:45', 39, 15, NULL, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-09-15 04:54:02', 31, 40, NULL, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-10-29 03:21:34', 29, 41, NULL, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-12-21 10:53:05', 12, 46, NULL, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-12-06 14:24:21', 11, 9, NULL, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-01-03 09:08:50', 48, 44, NULL, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-11-26 00:06:28', 29, 45, NULL, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-02-28 04:03:55', 12, 40, NULL, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-12-20 04:47:47', 48, 29, NULL, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-08-01 12:39:55', 20, 20, NULL, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-10-25 13:27:22', 50, 54, NULL, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-02-22 11:47:23', 51, 57, NULL, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-05-21 14:33:16', 52, 51, NULL, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-10-23 16:44:06', 31, 25, NULL, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-01-15 20:36:31', 50, 33, NULL, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-06-11 02:45:30', 5, 56, NULL, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-08-11 22:42:28', 50, 10, NULL, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-06-02 15:03:06', 19, 26, NULL, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-09-24 18:42:44', 25, 44, NULL, NULL);
-INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id) VALUES ('2023-08-02 03:08:45', 51, 15, NULL, NULL);
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-06-23 10:09:58', 35, NULL, NULL, 47, 'ut mauris eget massa tempor convallis nulla neque libero convallis');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-02-18 01:06:25', 37, NULL, NULL, 22, 'in porttitor pede justo eu massa donec dapibus duis at velit eu est');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-10-22 22:03:08', 46, NULL, NULL, 20, 'cubilia curae duis faucibus accumsan odio curabitur convallis duis consequat dui nec nisi volutpat eleifend donec');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-06-25 07:54:58', 22, NULL, NULL, 46, 'at turpis donec posuere metus vitae ipsum aliquam non mauris');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-04-19 05:27:05', 27, NULL, NULL, 9, 'convallis eget eleifend luctus ultricies eu nibh quisque id justo');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-12-13 10:07:39', 26, NULL, NULL, 41, 'platea dictumst etiam faucibus cursus urna ut tellus nulla ut erat id mauris vulputate elementum nullam varius nulla facilisi');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-10-11 02:10:01', 46, NULL, NULL, 30, 'semper est quam pharetra magna ac consequat metus sapien ut nunc vestibulum');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-04-30 21:01:55', 15, NULL, NULL, 32, 'morbi porttitor lorem id ligula suspendisse ornare consequat lectus in');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-08-12 19:57:14', 30, NULL, NULL, 47, 'adipiscing elit proin interdum mauris non ligula pellentesque ultrices phasellus id sapien in sapien iaculis congue vivamus metus arcu adipiscing');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-10-30 10:07:51', 60, NULL, NULL, 30, 'amet turpis elementum ligula vehicula consequat morbi a ipsum integer a nibh in quis justo maecenas rhoncus aliquam');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-11-15 22:18:34', 22, NULL, NULL, 26, 'sed vel enim sit amet nunc viverra dapibus nulla suscipit ligula in lacus curabitur at');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-02-13 15:10:54', 43, NULL, NULL, 41, 'suscipit a feugiat et eros vestibulum ac est lacinia nisi venenatis tristique fusce congue diam id ornare imperdiet');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-08-02 05:22:52', 40, NULL, NULL, 3, 'quis justo maecenas rhoncus aliquam lacus morbi quis tortor id nulla');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-10-07 00:49:00', 20, NULL, NULL, 46, 'in faucibus orci luctus et ultrices posuere cubilia curae nulla dapibus dolor vel est donec');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-08-26 04:42:06', 26, NULL, NULL, 50, 'lobortis sapien sapien non mi integer ac neque duis bibendum morbi non');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-03-19 03:00:57', 10, NULL, NULL, 28, 'metus vitae ipsum aliquam non mauris morbi non lectus aliquam sit amet');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-03-05 05:27:04', 55, NULL, NULL, 5, 'mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante vivamus tortor duis mattis egestas metus aenean fermentum donec');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-10-17 06:36:06', 25, NULL, NULL, 6, 'posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-04-02 15:21:05', 2, NULL, NULL, 32, 'ligula in lacus curabitur at ipsum ac tellus semper interdum mauris ullamcorper purus sit amet nulla quisque arcu');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-09-17 03:37:48', 17, NULL, 27, NULL, 'etiam pretium iaculis justo in hac habitasse platea dictumst etiam faucibus cursus urna ut tellus nulla ut');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-11-02 05:40:35', 53, NULL, 2, NULL, 'semper interdum mauris ullamcorper purus sit amet nulla quisque arcu libero rutrum ac lobortis vel dapibus at diam');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-11-26 03:29:43', 6, NULL, 12, NULL, 'ullamcorper augue a suscipit nulla elit ac nulla sed vel enim sit amet nunc viverra');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-06-19 16:26:46', 44, NULL, 48, NULL, 'amet justo morbi ut odio cras mi pede malesuada in imperdiet et commodo vulputate justo in blandit');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-05-29 19:32:12', 25, NULL, 44, NULL, 'sem sed sagittis nam congue risus semper porta volutpat quam pede lobortis ligula sit amet');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-06-12 11:52:19', 47, NULL, 2, NULL, 'mauris non ligula pellentesque ultrices phasellus id sapien in sapien iaculis congue vivamus metus arcu');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-06-06 23:09:05', 8, NULL, 45, NULL, 'et magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-11-19 04:14:40', 39, NULL, 22, NULL, 'mi pede malesuada in imperdiet et commodo vulputate justo in blandit ultrices enim lorem ipsum dolor');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-03-28 11:17:20', 40, NULL, 47, NULL, 'vel nulla eget eros elementum pellentesque quisque porta volutpat erat quisque erat eros viverra eget congue');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-01-24 18:35:20', 56, NULL, 36, NULL, 'velit nec nisi vulputate nonummy maecenas tincidunt lacus at velit vivamus vel nulla eget eros elementum pellentesque');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-02-21 08:49:46', 9, NULL, 37, NULL, 'erat tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-08-03 16:46:13', 38, NULL, 54, NULL, 'interdum mauris non ligula pellentesque ultrices phasellus id sapien in sapien iaculis congue vivamus');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-10-13 05:04:52', 35, NULL, 38, NULL, 'justo sollicitudin ut suscipit a feugiat et eros vestibulum ac est');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-06-08 06:16:42', 23, NULL, 30, NULL, 'aenean auctor gravida sem praesent id massa id nisl venenatis lacinia aenean sit amet justo morbi ut odio cras mi');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-01-14 15:04:36', 10, NULL, 10, NULL, 'molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-07-15 16:02:51', 23, NULL, 17, NULL, 'justo lacinia eget tincidunt eget tempus vel pede morbi porttitor lorem id ligula suspendisse ornare consequat lectus');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-03-03 17:20:49', 32, NULL, 58, NULL, 'ipsum aliquam non mauris morbi non lectus aliquam sit amet diam in magna bibendum imperdiet nullam');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-04-09 06:11:19', 35, NULL, 21, NULL, 'ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae nulla dapibus dolor vel');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-07-21 00:59:21', 19, NULL, 26, NULL, 'ullamcorper augue a suscipit nulla elit ac nulla sed vel enim sit amet');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-12-26 00:19:16', 23, NULL, 48, NULL, 'nullam orci pede venenatis non sodales sed tincidunt eu felis fusce posuere felis sed lacus morbi sem mauris laoreet ut');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-01-22 04:39:29', 22, 18, NULL, NULL, 'aliquam sit amet diam in magna bibendum imperdiet nullam orci pede venenatis non sodales sed tincidunt eu');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-05-01 07:35:45', 39, 15, NULL, NULL, 'amet sem fusce consequat nulla nisl nunc nisl duis bibendum');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-09-15 04:54:02', 31, 40, NULL, NULL, 'ac nibh fusce lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti in eleifend quam a');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-10-29 03:21:34', 29, 41, NULL, NULL, 'dictumst aliquam augue quam sollicitudin vitae consectetuer eget rutrum at lorem');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-12-21 10:53:05', 12, 46, NULL, NULL, 'sit amet sem fusce consequat nulla nisl nunc nisl duis bibendum');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-12-06 14:24:21', 11, 9, NULL, NULL, 'ac nulla sed vel enim sit amet nunc viverra dapibus');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-01-03 09:08:50', 48, 44, NULL, NULL, 'tortor id nulla ultrices aliquet maecenas leo odio condimentum id luctus');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-11-26 00:06:28', 29, 45, NULL, NULL, 'aenean sit amet justo morbi ut odio cras mi pede malesuada in imperdiet et commodo vulputate justo in blandit');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-02-28 04:03:55', 12, 40, NULL, NULL, 'arcu adipiscing molestie hendrerit at vulputate vitae nisl aenean lectus pellentesque eget nunc donec quis orci eget orci vehicula');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-12-20 04:47:47', 48, 29, NULL, NULL, 'pellentesque volutpat dui maecenas tristique est et tempus semper est quam');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-08-01 12:39:55', 20, 20, NULL, NULL, 'placerat ante nulla justo aliquam quis turpis eget elit sodales scelerisque');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-10-25 13:27:22', 50, 54, NULL, NULL, 'in sagittis dui vel nisl duis ac nibh fusce lacus purus');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-02-22 11:47:23', 51, 57, NULL, NULL, 'justo nec condimentum neque sapien placerat ante nulla justo aliquam quis turpis eget elit sodales scelerisque');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-05-21 14:33:16', 52, 51, NULL, NULL, 'et ultrices posuere cubilia curae nulla dapibus dolor vel est donec odio justo sollicitudin ut suscipit a');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-10-23 16:44:06', 31, 25, NULL, NULL, 'rutrum neque aenean auctor gravida sem praesent id massa id nisl venenatis lacinia aenean sit amet justo morbi');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-01-15 20:36:31', 50, 33, NULL, NULL, 'vitae quam suspendisse potenti nullam porttitor lacus at turpis donec posuere metus vitae ipsum aliquam non mauris morbi non');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-06-11 02:45:30', 5, 56, NULL, NULL, 'lacus at turpis donec posuere metus vitae ipsum aliquam non mauris morbi non lectus aliquam sit amet');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-08-11 22:42:28', 50, 10, NULL, NULL, 'ut ultrices vel augue vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae donec pharetra magna');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-06-02 15:03:06', 19, 26, NULL, NULL, 'nunc commodo placerat praesent blandit nam nulla integer pede justo lacinia eget tincidunt eget tempus vel pede');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-09-24 18:42:44', 25, 44, NULL, NULL, 'arcu libero rutrum ac lobortis vel dapibus at diam nam tristique');
+INSERT INTO Comments (date_posted, note_id, student_id, ta_id, professor_id, comment_content) VALUES ('2023-08-02 03:08:45', 51, 15, NULL, NULL, 'rhoncus sed vestibulum sit amet cursus id turpis integer aliquet massa id lobortis');
 
 -- DepartmentAnnouncements
 
