@@ -3,7 +3,8 @@
 -- Create a new database.  You can change the name later.  You'll
 -- need this name in the FLASK API file(s),  the AppSmith
 -- data source creation.
-create database notetastic;
+drop database notetastic
+create database if not exists notetastic;
 
 -- Via the Docker Compose file, a special user called webapp will
 -- be created in MySQL. We are going to grant that user
@@ -266,8 +267,6 @@ CREATE TABLE IF NOT EXISTS OHLocations
 -- Mock Data
 
 -- Professors
-
-INSERT INTO Professors (title, first_name, last_name, email) VALUES ('title', 'first_name', 'last_name', 'email');
 INSERT INTO Professors (title, first_name, last_name, email) VALUES ('Dr', 'Gilberte', 'Halpin', 'ghalpin0@miibeian.gov.cn');
 INSERT INTO Professors (title, first_name, last_name, email) VALUES ('Mr', 'Mendy', 'Marvelley', 'mmarvelley1@telegraph.co.uk');
 INSERT INTO Professors (title, first_name, last_name, email) VALUES ('Dr', 'Pansy', 'Rudiger', 'prudiger2@adobe.com');

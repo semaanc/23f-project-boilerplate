@@ -205,7 +205,7 @@ def get_oh(course_id, class_id):
     oh_data = cursor.fetchone()
 
     row_headers = [x[0] for x in cursor.description]
-    json_data = dict(zip(row_headers, oh_data))
+    json_data = dict(zip(row_headers, [str(o) for o in oh_data]))
     the_response = make_response(jsonify(json_data))
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
