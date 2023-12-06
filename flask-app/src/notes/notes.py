@@ -10,7 +10,7 @@ notes = Blueprint('notes', __name__)
 def get_all_notes():
     try:
         cursor = db.get_db().cursor()
-        cursor.execute('SELECT * FROM Notes AND (reported = FALSE)', (note_id))
+        cursor.execute('SELECT * FROM Notes AND (reported = FALSE)')
         row_headers = [x[0] for x in cursor.description]
         note_data = cursor.fetchall()
         json_data = []
