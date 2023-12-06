@@ -41,6 +41,24 @@ def create_class():
 
     return 'Success!'
 
+
+# View all classes a specific student is enolled in
+@classes.route('/classes/<student_id>', methods=['GET'])
+def get_students_classes(student_id):
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(f'SELECT * FROM Student_Classes WHERE student_id={student_id}')
+    row_headers = [x[0] for x in cursor.description]
+    classes_data = cursor.fetchall()
+
+    json_data = []
+    for cls in classes_data:
+        json_data.append(dict(zip(row_headers, cls)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
 # View a specific class
 @classes.route('/classes/<course_id>/<class_id>', methods=['GET'])
 def view_specific_class(course_id, class_id):

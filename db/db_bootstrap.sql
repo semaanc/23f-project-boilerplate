@@ -1064,7 +1064,7 @@ INSERT INTO StudentFolders (folder_name, date_created, student_id) VALUES ('Orga
 INSERT INTO StudentFolders (folder_name, date_created, student_id) VALUES ('Behavioral Neuroscience', '2021-03-12 22:21:55', 21);
 INSERT INTO StudentFolders (folder_name, date_created, student_id) VALUES ('Fundamentals of Computer Science', '2020-04-10 09:56:42', 43);
 INSERT INTO StudentFolders (folder_name, date_created, student_id) VALUES ('Art History', '2023-06-20 03:07:25', 12);
-
+INSERT INTO StudentFolders (folder_name, date_created, student_id) VALUES ('Fundamentals of Computer Science', '2023-06-20 03:07:25', 40);
 -- Notes
 
 INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder) VALUES (47, '2023-08-21 18:38:44', 'Stand-alone uniform encoding', TRUE, TRUE,'Module 1.1','Microeconomics');
