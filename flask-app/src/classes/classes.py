@@ -40,7 +40,10 @@ def create_class():
                     'VALUES (%s, %s, %s, %s, %s)', (course_id, class_id, course_name, professor_id, department_name))
     db.get_db().commit()
 
-    return 'Success!'
+    the_response = make_response(jsonify(data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
 
 
 # View all classes a specific student is enrolled in
