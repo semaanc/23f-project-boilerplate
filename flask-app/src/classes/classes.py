@@ -204,6 +204,20 @@ def remove_student_from_class(course_id, class_id, student_id):
     response.mimetype = 'application/json'
     return response
 
+# View all office hours hosted for a specific class
+@classes.route('/classes/<course_id>/<class_id>/oh', methods=['GET'])
+def get_ta_oh(course_id, class_id):
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM OfficeHours WHERE course_id = %s AND class_id = %s', (course_id, class_id))
+    oh_data = cursor.fetchone()
+
+    row_headers = [x[0] for x in cursor.description]
+    json_data = dict(zip(row_headers, oh_data))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
 # View all office hours hosted by a TA for a specific class
 @classes.route('/classes/<course_id>/<class_id>/oh/<ta_id>', methods=['GET'])
 def get_ta_oh(course_id, class_id, ta_id):
