@@ -270,6 +270,7 @@ def view_pinned_note(course_id, class_id, classf_id):
     the_response.mimetype = 'application/json'
     return the_response
 
+
 # Pin a note in a specific class folder
 @classes.route('classes/<course_id>/<class_id>/classfolders/<classf_id>/notes', methods=['PUT'])
 def pin_note_in_class_folder():

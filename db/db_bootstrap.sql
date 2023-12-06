@@ -945,6 +945,8 @@ INSERT INTO ClassFolders (folder_name, date_created, course_id, class_id) VALUES
 INSERT INTO ClassFolders (folder_name, date_created, course_id, class_id) VALUES ('Module 1.1', '2020-04-25 18:51:11', 6383, 2);
 INSERT INTO ClassFolders (folder_name, date_created, course_id, class_id) VALUES ('Chapter 1', '2021-06-25 06:23:32', 2219, 8);
 INSERT INTO ClassFolders (folder_name, date_created, course_id, class_id) VALUES ('Module 4', '2021-06-30 10:21:37', 9404, 1);
+INSERT INTO ClassFolders (folder_name, date_created, course_id, class_id) VALUES ('Module 5', '2021-06-30 10:22:30', 9404, 1);
+INSERT INTO ClassFolders (folder_name, date_created, course_id, class_id) VALUES ('Module 6', '2021-06-30 10:23:59', 9404, 1);
 INSERT INTO ClassFolders (folder_name, date_created, course_id, class_id) VALUES ('Module 4', '2021-03-10 09:18:55', 4521, 3);
 INSERT INTO ClassFolders (folder_name, date_created, course_id, class_id) VALUES ('Module 3', '2020-03-29 15:21:55', 9091, 5);
 INSERT INTO ClassFolders (folder_name, date_created, course_id, class_id) VALUES ('Module 5', '2021-11-23 17:50:28', 6439, 0);
@@ -1689,9 +1691,12 @@ INSERT INTO DepartmentAnnouncements (administrator_id, department_name, date_pos
 INSERT INTO DepartmentAnnouncements (administrator_id, department_name, date_posted, content) VALUES (31, 'School of Physical Education', '2022-12-25 23:19:16', 'Reminder: assignment due next week');
 INSERT INTO DepartmentAnnouncements (administrator_id, department_name, date_posted, content) VALUES (48, 'College of Information Technology', '2022-01-22 04:39:29', 'Announcement: class registration deadline');
 
--- OfficeHours
+-- OfficeHours 
 
 INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (43, 3423, 2, '21:55:00', '2020-09-23');
+INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (40, 9404, 1, '15:00:00', '2020-09-23');
+INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (3, 9404, 1, '15:00:00', '2020-09-24');
+INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (2, 9404, 1, '16:30:00', '2020-09-25');
 INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (50, 7008, 7, '19:26:00', '2020-07-31');
 INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (42, 4231, 0, '13:12:00', '2021-03-22');
 INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (23, 5281, 7, '13:04:00', '2020-08-29');
