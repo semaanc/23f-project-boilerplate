@@ -361,9 +361,17 @@ def add_ta_oh(course_id, class_id, ta_id):
 # Remove a TA’s office hour for a specific class
 @classes.route('/classes/<course_id>/<class_id>/oh/<ta_id>', methods=['DELETE'])
 def remove_ta_oh(course_id, class_id, ta_id):
+    request_data = request.get_json()
+
+    # Assuming request_data contains 'time' and 'date'
+    time = request_data.get('time')
+    date = request_data.get('date')
+
     cursor = db.get_db().cursor()
-    cursor.execute('DELETE FROM OfficeHours WHERE course_id = %s AND class_id = %s AND ta_id = %s', (course_id, class_id, ta_id))
+    cursor.execute('DELETE FROM OfficeHours WHERE course_id = %s AND class_id = %s AND ta_id = %s AND date = %s AND time = %s', (course_id, class_id, ta_id, date, time))
     db.get_db().commit()
+
+    return "Success!"
     
 
 # View pinned notes in a specific class folder
