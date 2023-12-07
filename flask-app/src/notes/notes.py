@@ -5,12 +5,35 @@ from src import db
 
 notes = Blueprint('notes', __name__)
 
-# View all nonreported notes
+# View all notes
 @notes.route('/notes', methods=['GET'])
 def get_all_notes():
     try:
         cursor = db.get_db().cursor()
-        cursor.execute('SELECT * FROM Notes WHERE (reported = FALSE)')
+        cursor.execute(f'SELECT * FROM Notes')
+        row_headers = [x[0] for x in cursor.description]
+        note_data = cursor.fetchall()
+        json_data = []
+        for note in note_data:
+            json_data.append(dict(zip(row_headers, note)))
+        the_response = make_response(jsonify(json_data))
+        the_response.status_code = 200
+        the_response.mimetype = 'application/json'
+        return the_response
+    except Exception as e:
+        error_message = {"error": str(e)}
+        the_response = make_response(jsonify(error_message))
+        the_response.status_code = 500
+        the_response.mimetype = 'application/json'
+        return the_response
+    
+
+# View all nonreported notes for a class
+@notes.route('/notes/<course_id>/<class_id>', methods=['GET'])
+def get_all_notes_for_class(course_id, class_id):
+    try:
+        cursor = db.get_db().cursor()
+        cursor.execute(f'SELECT * FROM Notes WHERE (reported = FALSE) AND course_id = {course_id} AND class_id = {class_id}')
         row_headers = [x[0] for x in cursor.description]
         note_data = cursor.fetchall()
         json_data = []
@@ -49,6 +72,25 @@ def view_specific_note(note_id):
         the_response.mimetype = 'application/json'
         return the_response
 
+# Add a note
+@notes.route('/notes', methods=['POST'])
+def add_new_note():
+    try:
+        cursor = db.get_db().cursor()
+        content = request.json
+        cursor.execute('INSERT INTO Notes (student_id, note_content, student_folder, class_folder, class_id, course_id) VALUES (%s, %s, %s, %s, %s, %s)', (content["student_id"], content["note_content"], content["student_folder"], content["class_folder"], content["class_id"], content["course_id"]))
+        db.get_db().commit()
+        the_response = make_response(jsonify({"message": "Note added"}))
+        the_response.status_code = 200
+        the_response.mimetype = 'application/json'
+        return the_response
+    except Exception as e:
+        error_message = {"error": str(e)}
+        the_response = make_response(jsonify(error_message))
+        the_response.status_code = 500
+        the_response.mimetype = 'application/json'
+        return the_response
+    
 # Edit a specific note
 @notes.route('/notes/<note_id>', methods=['PUT'])
 def edit_specific_note():

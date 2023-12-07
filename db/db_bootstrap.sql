@@ -127,8 +127,8 @@ CREATE TABLE IF NOT EXISTS Notes
     student_id     INTEGER,
     date_posted    DATETIME DEFAULT CURRENT_TIMESTAMP,
     note_content   TEXT,
-    reported       BOOLEAN,
-    pinned         BOOLEAN,
+    reported       BOOLEAN DEFAULT FALSE,
+    pinned         BOOLEAN DEFAULT FALSE,
     class_folder   VARCHAR(50),
     student_folder VARCHAR(50),
     class_id       INTEGER,
@@ -1104,6 +1104,7 @@ INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, clas
 INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (45, '2020-11-07 06:54:34', 'Multi-tiered eco-centric info-mediaries', FALSE, FALSE,'Module 4','Data Structures and Algorithms',3,4521);
 INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (21, '2020-12-13 11:18:16', 'Extended discrete help-desk', TRUE, FALSE,'Module 1.1','Introduction to Psychology',2,3913);
 INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (38, '2022-12-31 19:30:45', 'Quality-focused bi-directional instruction set', FALSE, FALSE,'Chapter 4','Environmental Thermodynamics',8,2219);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (1, '2022-12-31 19:30:45', 'Quality-focused bi-directional instruction set', FALSE, FALSE,'Chapter 1','Environmental Thermodynamics',8,2219);
 INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (24, '2022-04-20 23:50:26', 'Open-architected well-modulated neural-net', TRUE, TRUE,'Module 5.1','Modern and Contemporary Art',0,123);
 INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (57, '2020-12-17 10:11:25', 'Profound tertiary migration', FALSE, FALSE,'Lecture 1','Comparative World Literature',0,5792);
 INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (29, '2023-08-31 08:26:06', 'Mandatory multimedia Graphic Interface', TRUE, FALSE,'Module 4','Linear Algebra',8,3274);
@@ -1129,6 +1130,9 @@ INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, clas
 INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (26, '2023-11-05 14:31:43', 'Multi-lateral actuating database', FALSE, FALSE,'Module 2','African American History',6,8514);
 INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (34, '2023-06-05 01:55:48', 'Cross-platform real-time website', FALSE, FALSE,'Module 3','Microeconomics',4,9552);
 INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (49, '2021-02-09 02:26:30', 'Visionary empowering utilisation', FALSE, TRUE,'Module 1','Introduction to Cognitive Psychology',3,7509);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (40, '2021-02-09 02:26:30', 'Visionary empowering utilisation', FALSE, TRUE,'Module 2','Organic Chemistry',6,8514);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (40, '2021-02-09 02:26:30', 'Chapter 1 notes', FALSE, TRUE,'Module 2','Organic Chemistry',6,8514);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (40, '2021-02-09 02:26:30', 'Fundies notes', FALSE, TRUE,'Lecture 4','Fundamentals of Computer Science',2,3913);
 
 -- Student_Classes
 
