@@ -409,7 +409,7 @@ def unpin_note_in_class_folder(course_id, class_id, classf_id):
 
 # Get all TA office hours 
 @classes.route('/classes/ta/<ta_id>/oh', methods=['GET'])
-def get_ta_oh(ta_id):
+def get_all_ta_oh(ta_id):
     cursor = db.get_db().cursor()
     cursor.execute('SELECT * FROM OfficeHours WHERE ta_id = %s', (ta_id,))
     row_headers = [x[0] for x in cursor.description]
