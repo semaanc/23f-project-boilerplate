@@ -411,15 +411,14 @@ def unpin_note_in_class_folder(course_id, class_id, classf_id):
 @classes.route('/classes/ta/<ta_id>/oh', methods=['GET'])
 def get_all_ta_oh(ta_id):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM OfficeHours WHERE ta_id = %s', (ta_id,))
+    cursor.execute('SELECT * FROM OHLocations WHERE ta_id = %s', (str(ta_id)))
     row_headers = [x[0] for x in cursor.description]
+
     oh_data = cursor.fetchall()
 
-    json_data = []
-    for oh in oh_data:
-        json_data.append(dict(zip(row_headers, oh)))
+    oh_list = [{row_headers[i]: str(o) for i, o in enumerate(elem)} for elem in oh_data]
 
-    the_response = make_response(jsonify(json_data))
+    the_response = make_response(jsonify(oh_list))
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
