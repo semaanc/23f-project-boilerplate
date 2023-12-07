@@ -221,19 +221,17 @@ def get_oh(course_id, class_id):
 def get_ta_oh(course_id, class_id, ta_id):
     cursor = db.get_db().cursor()
     cursor.execute('SELECT * FROM OfficeHours WHERE course_id = %s AND class_id = %s AND ta_id = %s', (course_id, class_id, ta_id))
+    row_headers = [x[0] for x in cursor.description]
+
     oh_data = cursor.fetchall()
 
-    row_headers = [x[0] for x in cursor.description]
-    json_data = []
+    oh_list = [{row_headers[i]: str(o) for i, o in enumerate(elem)} for elem in oh_data]
 
-    for row in oh_data:
-        json_data.append(dict(zip(row_headers, row)))
-
-    the_response = make_response(jsonify(json_data))
+    the_response = make_response(jsonify(oh_list))
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
-
+    
 
 # View all the classes a TA helps in 
 @classes.route('/classes/ta/<ta_id>', methods=['GET'])
@@ -265,8 +263,10 @@ def add_ta_oh(course_id, class_id, ta_id):
     location = request_data.get('location')
 
     cursor = db.get_db().cursor()
-    cursor.execute('INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date, location) VALUES (%s, %s, %s, %s, %s, %s)',
-                   (ta_id, course_id, class_id, class_id, time, date, location))
+    cursor.execute('INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (%s, %s, %s, %s, %s)',
+                   (ta_id, course_id, class_id, time, date))
+    cursor.execute('INSERT INTO OHLocations (ta_id, course_id, class_id, time, date, location) VALUES (%s, %s, %s, %s, %s, %s)',
+                   (ta_id, course_id, class_id, time, date,location))
     db.get_db().commit()
 
     return "Success!"
