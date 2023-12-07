@@ -221,14 +221,38 @@ def get_oh(course_id, class_id):
 def get_ta_oh(course_id, class_id, ta_id):
     cursor = db.get_db().cursor()
     cursor.execute('SELECT * FROM OfficeHours WHERE course_id = %s AND class_id = %s AND ta_id = %s', (course_id, class_id, ta_id))
-    oh_data = cursor.fetchone()
+    oh_data = cursor.fetchall()
 
     row_headers = [x[0] for x in cursor.description]
-    json_data = dict(zip(row_headers, oh_data))
+    json_data = []
+
+    for row in oh_data:
+        json_data.append(dict(zip(row_headers, row)))
+
     the_response = make_response(jsonify(json_data))
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
+
+# View all the classes a TA helps in 
+@classes.route('/classes/ta/<ta_id>', methods=['GET'])
+def get_ta_classes(ta_id):
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM Classes_TAs WHERE ta_id = %s', (ta_id,))
+    data = cursor.fetchall()
+
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+
+    for row in data:
+        json_data.append(dict(zip(row_headers, row)))
+
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
 
 # Add a new office hour for a TA for a specific class
 @classes.route('/classes/<course_id>/<class_id>/oh/<ta_id>', methods=['POST'])
