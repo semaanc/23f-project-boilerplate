@@ -1134,6 +1134,7 @@ INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, clas
 INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (40, '2021-02-09 02:26:30', 'Visionary empowering utilisation', FALSE, TRUE,'Module 2','Organic Chemistry',6,8514);
 INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (40, '2021-02-09 02:26:30', 'Chapter 1 notes', FALSE, TRUE,'Module 2','Organic Chemistry',6,8514);
 INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (40, '2021-02-09 02:26:30', 'Fundies notes', FALSE, TRUE,'Lecture 4','Fundamentals of Computer Science',2,3913);
+INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (47, '2023-08-21 18:38:44', 'Stand-alone uniform encoding', TRUE, TRUE,'Module 5.1','Microeconomics',5,5801);
 
 -- Student_Classes
 
@@ -1697,7 +1698,7 @@ INSERT INTO DepartmentAnnouncements (administrator_id, department_name, date_pos
 INSERT INTO DepartmentAnnouncements (administrator_id, department_name, date_posted, content) VALUES (48, 'College of Information Technology', '2022-01-22 04:39:29', 'Announcement: class registration deadline');
 
 -- OfficeHours 
-
+INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (43, 5801, 5, '21:55:00', '2020-09-23');
 INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (43, 3423, 2, '21:55:00', '2020-09-23');
 INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (40, 9404, 1, '15:00:00', '2020-09-23');
 INSERT INTO OfficeHours (ta_id, course_id, class_id, time, date) VALUES (3, 9404, 1, '15:00:00', '2020-09-24');
