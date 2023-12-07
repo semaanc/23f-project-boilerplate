@@ -1067,6 +1067,7 @@ INSERT INTO StudentFolders (folder_name, date_created, student_id) VALUES ('Beha
 INSERT INTO StudentFolders (folder_name, date_created, student_id) VALUES ('Fundamentals of Computer Science', '2020-04-10 09:56:42', 43);
 INSERT INTO StudentFolders (folder_name, date_created, student_id) VALUES ('Art History', '2023-06-20 03:07:25', 12);
 INSERT INTO StudentFolders (folder_name, date_created, student_id) VALUES ('Fundamentals of Computer Science', '2023-06-20 03:07:25', 40);
+
 -- Notes
 
 INSERT INTO Notes (student_id, date_posted, note_content, reported, pinned, class_folder, student_folder, class_id, course_id) VALUES (47, '2023-08-21 18:38:44', 'Stand-alone uniform encoding', TRUE, TRUE,'Module 1.1','Microeconomics',2,6383);

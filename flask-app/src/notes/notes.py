@@ -93,11 +93,11 @@ def add_new_note():
     
 # Edit a specific note
 @notes.route('/notes/<note_id>', methods=['PUT'])
-def edit_specific_note():
+def edit_specific_note(note_id):
     try:
         cursor = db.get_db().cursor()
         content = request.json
-        cursor.execute('UPDATE Notes SET note_content = %s WHERE (note_id = %s)', (content['note_content'], content['note_id']))
+        cursor.execute('UPDATE Notes SET note_content = %s WHERE (note_id = %s)', (content['note_content'], note_id))
         db.get_db().commit()
         the_response = make_response(jsonify({"message": "Edited"}))
         the_response.status_code = 200
@@ -112,16 +112,12 @@ def edit_specific_note():
 
 # Delete a specific note
 @notes.route('/notes/<note_id>', methods=['DELETE'])
-def delete_specific_note():
+def delete_specific_note(note_id):
     try:
         cursor = db.get_db().cursor()
-        content = request.json
-        cursor.execute('DELETE FROM Notes WHERE (note_id = %s)', (content['note_id']))
+        cursor.execute('DELETE FROM Notes WHERE (note_id = %s)', (note_id,))
         db.get_db().commit()
-        the_response = make_response(jsonify({"message": "Deleted"}))
-        the_response.status_code = 200
-        the_response.mimetype = 'application/json'
-        return the_response
+        return "Deleted"
     except Exception as e:
         error_message = {"error": str(e)}
         the_response = make_response(jsonify(error_message))
@@ -198,7 +194,7 @@ def add_reply_to_comment(note_id, comment_id):
     try:
         cursor = db.get_db().cursor()
         content = request.json
-        cursor.execute('INSERT INTO Comments (note_id, comment_content, reply_to) VALUES (%s, %s, %s)', (note_id, content['comment_content'], comment_id))
+        cursor.execute('INSERT INTO Comments (note_id, comment_content) VALUES (%s, %s)', (note_id, content['comment_content']))
         db.get_db().commit()
         the_response = make_response(jsonify({"message": "Created"}))
         the_response.status_code = 201
@@ -237,10 +233,7 @@ def delete_specific_comment(note_id, comment_id):
         cursor = db.get_db().cursor()
         cursor.execute('DELETE FROM Comments WHERE (note_id = %s) AND (comment_id = %s)', (note_id, comment_id))
         db.get_db().commit()
-        the_response = make_response(jsonify({"message": "Deleted"}))
-        the_response.status_code = 200
-        the_response.mimetype = 'application/json'
-        return the_response
+        return "Deleted!"
     except Exception as e:
         error_message = {"error": str(e)}
         the_response = make_response(jsonify(error_message))
