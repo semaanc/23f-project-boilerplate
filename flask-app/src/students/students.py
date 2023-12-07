@@ -48,27 +48,15 @@ def get_specific_student_student_folders(student_id):
 # Add a student folder
 @students.route('/students/<student_id>/studentfolders', methods=['POST'])
 def add_new_student_folder(student_id):
-
-    # collecting data from the request object 
-    the_data = request.json
-    current_app.logger.info(the_data)
-
-    #extracting the variable
-    name = the_data['folder_name']
-
-    # Constructing the query
-    query = f'INSERT INTO StudentFolders (folder_name, student_id) VALUES ({name}, {student_id})'
-
-    current_app.logger.info(query)
-
-    # executing and committing the insert statement 
     cursor = db.get_db().cursor()
-    cursor.execute(query)
+    content = request.json
+
+    cursor.execute('INSERT INTO StudentFolders (folder_name, student_id) VALUES (%s, %s)', (content['folder_name'], student_id))
     db.get_db().commit()
-    
-    response = jsonify('Student folder created')
-    
-    return response
+    the_response = make_response(jsonify({"message": "Created"}))
+    the_response.status_code = 201
+    the_response.mimetype = 'application/json'
+    return the_response
 
 # View contents of a specific student folder
 @students.route('/students/<student_id>/studentfolders/<folder_name>', methods=['GET'])
@@ -93,21 +81,11 @@ def get_notes_in_student_folder(student_id, folder_name):
 # Delete a specific student folder
 @students.route('/students/<student_id>/studentfolders', methods=['DELETE'])
 def delete_student_folder(student_id):
-    # collecting data from the request object 
-    the_data = request.json
-    current_app.logger.info(the_data)
-
-    # Constructing the query
-    query = ('''DELETE FROM StudentFolders
-                WHERE student_id = %s AND folder_name = %s'''), (student_id, the_data["folder_name"])
-    
-    current_app.logger.info(query)
-
-    # executing and committing the insert statement 
     cursor = db.get_db().cursor()
-    cursor.execute(query)
+    content = request.json
+    cursor.execute('DELETE FROM StudentFolders WHERE student_id = %s AND folder_name = %s', (student_id, content["folder_name"]))
     db.get_db().commit()
-
-    response = jsonify('Student folder deleted')
-    
-    return response
+    the_response = make_response(jsonify({"message": "Deleted"}))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
