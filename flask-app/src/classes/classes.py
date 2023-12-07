@@ -364,6 +364,7 @@ def remove_ta_oh(course_id, class_id, ta_id):
     cursor = db.get_db().cursor()
     cursor.execute('DELETE FROM OfficeHours WHERE course_id = %s AND class_id = %s AND ta_id = %s', (course_id, class_id, ta_id))
     db.get_db().commit()
+    
 
 # View pinned notes in a specific class folder
 @classes.route('classes/<course_id>/<class_id>/classfolders/<classf_id>/notes/pinned', methods=['GET'])
@@ -405,3 +406,20 @@ def unpin_note_in_class_folder(course_id, class_id, classf_id):
     db.get_db().commit()
 
     return "Note unpinned successfully!"
+
+# Get all TA office hours 
+@classes.route('/classes/ta/<ta_id>/oh', methods=['GET'])
+def get_ta_oh(ta_id):
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM OfficeHours WHERE ta_id = %s', (ta_id,))
+    row_headers = [x[0] for x in cursor.description]
+    oh_data = cursor.fetchall()
+
+    json_data = []
+    for oh in oh_data:
+        json_data.append(dict(zip(row_headers, oh)))
+
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
