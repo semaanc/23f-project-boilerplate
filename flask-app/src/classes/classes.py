@@ -361,9 +361,17 @@ def add_ta_oh(course_id, class_id, ta_id):
 # Remove a TA’s office hour for a specific class
 @classes.route('/classes/<course_id>/<class_id>/oh/<ta_id>', methods=['DELETE'])
 def remove_ta_oh(course_id, class_id, ta_id):
+    request_data = request.get_json()
+
+    # Assuming request_data contains 'time' and 'date'
+    time = request_data.get('time')
+    date = request_data.get('date')
+
     cursor = db.get_db().cursor()
-    cursor.execute('DELETE FROM OfficeHours WHERE course_id = %s AND class_id = %s AND ta_id = %s', (course_id, class_id, ta_id))
+    cursor.execute('DELETE FROM OfficeHours WHERE course_id = %s AND class_id = %s AND ta_id = %s AND date = %s AND time = %s', (course_id, class_id, ta_id, date, time))
     db.get_db().commit()
+
+    return "Success!"
     
 
 # View pinned notes in a specific class folder
@@ -406,6 +414,18 @@ def unpin_note_in_class_folder(course_id, class_id, classf_id):
     db.get_db().commit()
 
     return "Note unpinned successfully!"
+
+# Report a note in a specific class folder
+@classes.route('/classes/<course_id>/<class_id>/classfolders/<classf_id>/notes/report', methods=['PUT'])
+def reported_note(course_id, class_id, classf_id):
+    data = request.get_json()
+    note_id = data['note_id']
+
+    cursor = db.get_db().cursor()
+    cursor.execute('UPDATE Notes SET reported = TRUE WHERE note_id = %s', (note_id,))
+    db.get_db().commit()
+
+    return "Note reported successfully!"
 
 # Get all TA office hours 
 @classes.route('/classes/ta/<ta_id>/oh', methods=['GET'])
