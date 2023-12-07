@@ -57,7 +57,7 @@ def add_new_student_folder(student_id):
     name = the_data['folder_name']
 
     # Constructing the query
-    query = f'INSERT INTO StudentFolders (folder_name, student_id) values ({name}, {student_id})'
+    query = f'INSERT INTO StudentFolders (folder_name, student_id) VALUES ({name}, {student_id})'
 
     current_app.logger.info(query)
 
@@ -90,43 +90,16 @@ def get_notes_in_student_folder(student_id, folder_name):
 
     return response
 
-
-# Add a note to a specific student folder
-@students.route('/students/<student_id>/studentfolders/<folder_name>', methods=['POST'])
-def add_note_to_student_folder(student_id, folder_name):
-    # collecting data from the request object 
-    the_data = request.json
-    current_app.logger.info(the_data)
-
-    #extracting the variable
-    note_id = the_data['note_id']
-
-    # Constructing the query
-    query = f'''UPDATE Notes
-                SET student_folder = {folder_name}
-                WHERE student_id = {student_id} AND note_id = {note_id}'''
-    
-    current_app.logger.info(query)
-
-    # executing and committing the insert statement 
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    db.get_db().commit()
-    
-    response = jsonify('Note added to student folder')
-    
-    return response
-
 # Delete a specific student folder
-@students.route('/students/<student_id>/studentfolders/<folder_name>', methods=['DELETE'])
-def delete_student_folder(student_id, folder_name):
+@students.route('/students/<student_id>/studentfolders', methods=['DELETE'])
+def delete_student_folder(student_id):
     # collecting data from the request object 
     the_data = request.json
     current_app.logger.info(the_data)
 
     # Constructing the query
-    query = f'''DELETE FROM StudentFolders
-                WHERE student_id = {student_id} AND folder_name = {folder_name}'''
+    query = ('''DELETE FROM StudentFolders
+                WHERE student_id = %s AND folder_name = %s'''), (student_id, the_data["folder_name"])
     
     current_app.logger.info(query)
 
