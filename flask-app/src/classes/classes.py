@@ -415,6 +415,18 @@ def unpin_note_in_class_folder(course_id, class_id, classf_id):
 
     return "Note unpinned successfully!"
 
+# Report a note in a specific class folder
+@classes.route('/classes/<course_id>/<class_id>/classfolders/<classf_id>/notes/report', methods=['PUT'])
+def reported_note(course_id, class_id, classf_id):
+    data = request.get_json()
+    note_id = data['note_id']
+
+    cursor = db.get_db().cursor()
+    cursor.execute('UPDATE Notes SET reported = TRUE WHERE note_id = %s', (note_id,))
+    db.get_db().commit()
+
+    return "Note reported successfully!"
+
 # Get all TA office hours 
 @classes.route('/classes/ta/<ta_id>/oh', methods=['GET'])
 def get_all_ta_oh(ta_id):
